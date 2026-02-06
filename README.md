@@ -8,11 +8,6 @@
 
 # File Manager Web GUI V1.0
 
-<div align="center">
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
-[![CMake](https://img.shields.io/badge/CMake-3.15+-blue.svg)](https://cmake.org/)
-
 A high-performance directory scanning and file tree generation tool built with C++17 and modern Web technologies.
 Provides an intuitive graphical interface to browse local file system structures, generate customizable text-based directory trees, and export results.
 
