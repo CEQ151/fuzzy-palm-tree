@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Manager Web GUI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Codicons removed -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-folder-tree"></i>
+                <h1>File Manager Web GUI</h1>
+            </div>
+            <div class="server-status">
+                <span class="status-indicator active"></span>
+                <span>Server: <span id="server-status">Connected</span></span>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="sidebar">
+                <!-- Upload section removed as requested -->
+                
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-cog"></i> Settings</h3>
+                    <div class="settings">
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="show-size" checked>
+                                <span class="checkbox-custom"></span>
+                                Show file sizes
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>Max depth:</label>
+                            <input type="number" id="max-depth" min="-1" value="-1">
+                            <small>-1 for unlimited</small>
+                        </div>
+                        <div class="setting-item">
+                            <label>Exclude patterns (comma separated):</label>
+                            <input type="text" id="exclude-patterns" placeholder="*.tmp, .git, node_modules">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3><i class="fas fa-info-circle"></i> Info</h3>
+                    <div class="info-box">
+                        <p><i class="fas fa-folder"></i> <span id="current-path">No folder selected</span></p>
+                        <p><i class="fas fa-file"></i> Files: <span id="file-count">0</span></p>
+                        <p><i class="fas fa-database"></i> Total size: <span id="total-size">0 B</span></p>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <button class="btn btn-danger full-width" id="clear-all-btn">
+                        <i class="fas fa-trash-alt"></i> Clear All Data
+                    </button>
+                </div>
+            </div>
+            
+            <div class="content">
+                <div class="content-header">
+                    <h2><i class="fas fa-sitemap"></i> File Tree</h2>
+                    <div class="actions">
+                        <button class="btn btn-primary" id="scan-btn">
+                            <i class="fas fa-search"></i> Scan Directory
+                        </button>
+                        <button class="btn btn-secondary" id="generate-tree-btn">
+                            <i class="fas fa-code"></i> Generate Tree
+                        </button>
+                        <button class="btn btn-success" id="download-btn">
+                            <i class="fas fa-download"></i> Download Tree
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="path-input">
+                    <label for="directory-path">Directory Path:</label>
+                    <div class="input-group">
+                        <input type="text" id="directory-path" placeholder="Enter directory path (e.g. C:/Projects/MyProject)">
+                        <button class="btn btn-icon" id="browse-btn" title="Browse">
+                            <i class="fas fa-folder-open"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="results">
+                    <div class="results-header">
+                        <h3>Generated File Tree</h3>
+                        <div class="results-actions">
+                            <button class="btn btn-icon" id="copy-btn" title="Copy to clipboard">
+                                <i class="far fa-copy"></i>
+                            </button>
+                            <button class="btn btn-icon" id="clear-btn" title="Clear">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tree-container">
+                        <pre id="tree-output">Select a folder and click "Generate Tree" to see the file structure here.</pre>
+                    </div>
+                </div>
+                
+                <div class="file-list">
+                    <h3><i class="fas fa-list"></i> File List</h3>
+                    <div class="table-container">
+                        <table id="file-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Size</th>
+                                    <th>Depth</th>
+                                </tr>
+                            </thead>
+                            <tbody id="file-table-body">
+                                <tr>
+                                    <td colspan="4" class="empty-message">No files scanned yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>File Manager Web GUI v1.0.0 | <span id="api-status">API: Checking...</span></p>
+        </footer>
+    </div>
+    
+    <!-- Toast notifications -->
+    <div id="toast-container"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
