@@ -1,177 +1,195 @@
-# File Manager Web GUI V1.0
-
 <div align="center">
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
-[![CMake](https://img.shields.io/badge/CMake-3.15+-blue.svg)](https://cmake.org/)
-
-一个基于 C++17 和现代 Web 技术构建的高性能目录扫描与文件树生成工具。
-提供直观的图形界面来浏览本地文件系统结构、生成可定制的文本目录树，并支持导出功能。
-
-[功能特性](#-功能特性) • [快速开始](#-快速开始) • [使用指南](#-使用指南) • [API 文档](#-api-文档)
+**English** | [简体中文](./README_zh.md)
 
 </div>
 
 ---
 
-## ✨ 功能特性
+# File Manager Web GUI V1.0
 
-*   **📂 目录扫描**: 基于 C++ 本地文件系统 API，快速递归扫描大型目录。
-*   **🌳 智能树状生成**: 自动生成美观的 ASCII/Unicode 文本格式文件树（类似 Linux `tree` 命令）。
-*   **🎨 现代化 Web 界面**: 简洁响应式的 UI，无需安装额外的客户端软件。
-*   **⚙️ 灵活的过滤配置**:
-    *   **深度控制**: 可设置最大扫描深度。
-    *   **排除模式**: 支持通配符排除不需要的文件或文件夹（如 `node_modules`, `.git`）。
-    *   **显示选项**: 可选显示文件大小（支持 KB/MB/GB 自动格式化）。
-*   **📋 便捷导出**:
-    *   一键复制文件树文本到剪贴板。
-    *   下载扫描结果为 `.txt` 文件。
-*   **🚀 轻量级后端**: 单个可执行文件，基于 `cpp-httplib`，低内存占用。
-*   **🌏 完整中文支持**: 针对 Windows 环境优化，完美支持中文路径和文件名的扫描与显示。
+<div align="center">
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
+[![CMake](https://img.shields.io/badge/CMake-3.15+-blue.svg)](https://cmake.org/)
+
+A high-performance directory scanning and file tree generation tool built with C++17 and modern Web technologies.
+Provides an intuitive graphical interface to browse local file system structures, generate customizable text-based directory trees, and export results.
+
+[Features](#-features) • [Quick Start](#-quick-start) • [Usage Guide](#-usage-guide) • [API Documentation](#-api-documentation)
+
+</div>
 
 ---
 
-## 🚀 快速开始
+## ✨ Features
 
-### 1. 环境要求
+* **📂 Directory Scanning**: Fast recursive scanning of large directories powered by the C++ native filesystem API.
+* **🌳 Smart Tree Generation**: Automatically generates beautiful ASCII/Unicode text file trees (similar to the Linux `tree` command).
+* **🎨 Modern Web Interface**: Clean and responsive UI; no extra client-side software required.
+* **⚙️ Flexible Filter Configuration**:
+    * **Depth Control**: Set maximum scanning depth.
+    * **Exclude Patterns**: Support for wildcard exclusions of unwanted files or folders (e.g., `node_modules`, `.git`).
+    * **Display Options**: Optional file size display (supports automatic KB/MB/GB formatting).
+* **📋 Convenient Export**:
+    * One-click copy of the file tree text to the clipboard.
+    * Download scanning results as a `.txt` file.
+* **🚀 Lightweight Backend**: Single executable based on `cpp-httplib` with low memory footprint.
+* **🌏 Full Unicode Support**: Optimized for Windows environments, perfectly supporting the scanning and display of Chinese paths and filenames.
 
-*   **操作系统**: Windows 10/11, Linux, macOS。
-*   **编译器**: 支持 C++17 的编译器 (GCC 8+, Clang, MSVC)。
-    *   *Windows 用户推荐使用 MSYS2/MinGW64 环境*。
-*   **构建工具**: CMake 3.15 或更高版本。
+---
 
-### 2. 获取源码
+## 🚀 Quick Start
+
+### 1. Requirements
+
+* **OS**: Windows 10/11, Linux, macOS.
+* **Compiler**: A compiler supporting C++17 (GCC 8+, Clang, MSVC).
+    * *Windows users are recommended to use MSYS2/MinGW64 environment*.
+* **Build Tool**: CMake 3.15 or higher.
+
+### 2. Get the Source Code
 
 ```bash
-git clone https://github.com/CEQ151/fuzzy-palm-tree.git
+git clone [https://github.com/CEQ151/fuzzy-palm-tree.git](https://github.com/CEQ151/fuzzy-palm-tree.git)
 cd fuzzy-palm-tree
 ```
 
-### 3. 编译项目
+### 3. Compile the Project
 
-在项目根目录下执行以下命令：
+Execute the following commands in the project root directory:
 
 ```bash
-# 创建并进入构建目录
+# Create and enter the build directory
 mkdir build
 cd build
 
-# 配置 CMake (自动检测环境)
+# Configure CMake (Auto-detect environment)
 cmake ..
 
-# 开始编译
+# Start compilation
 cmake --build .
 ```
 
-*编译完成后，可执行文件 `filemanager` (或 `filemanager.exe`) 将位于 `build/bin/` 目录下。*
+*Once compilation is complete, the executable `filemanager` (or `filemanager.exe`) will be located in the `build/bin/` directory.*
 
-### 4. 运行服务
+### 4. Run the Service
 
 ```bash
-# 进入输出目录
+# Enter the output directory
 cd bin
 
-# 启动服务器 (默认端口 8080)
+# Start the server (default port 8080)
 ./filemanager
 
-# 或者指定端口启动
+# Or specify a port
 ./filemanager 9090
 ```
 
-启动成功后，终端会显示：
+After a successful start, the terminal will display:
+
 > Server is running on port 8080
+>
 > Press Ctrl+C to stop the server
 
-此时请在浏览器中访问：**http://localhost:8080**
+Access the interface in your browser at: **http://localhost:8080**
 
----
+------
 
-## 📖 使用指南
+## 📖 Usage Guide
 
-### 🖥️ 扫描目录
-1.  在页面顶部的 **"Directory Path"** 输入框中，输入您想要扫描的 **本地绝对路径**。
-    *   *Windows 示例*: `D:\Projects\MyCode` 或 `C:/Users/Admin/Documents`
-    *   *Linux/Mac 示例*: `/home/user/projects`
-2.  点击 **"Scan Directory"** 按钮或直接按回车键。
-3.  系统将快速扫描该目录，并在页面右侧显示生成的文件树预览。
+### 🖥️ Scanning a Directory
 
-### ⚙️ 自定义设置 (左侧面板)
-*   **Show file sizes**: 勾选后，树状图中将显示每个文件的大小。
-*   **Max depth**: 限制扫描的层级深度。输入 `-1` 表示无限制（递归所有子目录）。
-*   **Exclude patterns**: 输入要忽略的文件或文件夹名称，使用逗号分隔。
-    *   *示例*: `node_modules, .git, *.tmp, dist`
+1. Enter the **local absolute path** you wish to scan in the **"Directory Path"** input box at the top.
+   - *Windows Example*: `D:\Projects\MyCode` or `C:/Users/Admin/Documents`
+   - *Linux/Mac Example*: `/home/user/projects`
+2. Click the **"Scan Directory"** button or press Enter.
+3. The system will quickly scan the directory and display the generated file tree preview on the right side of the page.
 
-### 📤 导出结果
-扫描完成后，您可以使用右侧顶部的工具栏：
-*   **📋 Copy**: 将生成的文件树文本完整复制到剪贴板。
-*   **💾 Download**: 将文件树保存为 `.txt` 文本文件到本地。
-*   **🗑️ Clear**: 清空当前的显示结果。
+### ⚙️ Custom Settings (Left Panel)
 
----
+- **Show file sizes**: When checked, the size of each file will be shown in the tree diagram.
+- **Max depth**: Limits the depth of recursive scanning. Enter `-1` for unlimited depth (all subdirectories).
+- **Exclude patterns**: Enter file or folder names to ignore, separated by commas.
+  - *Example*: `node_modules, .git, *.tmp, dist`
 
-## 🔌 API 文档
+### 📤 Exporting Results
 
-后端提供 RESTful API，可供自动化脚本或其他工具调用。
+After scanning, you can use the toolbar at the top right:
 
-### 1. 获取服务器信息
-*   **接口**: `GET /api/info`
-*   **描述**: 检查服务器状态及版本。
+- **📋 Copy**: Copy the entire generated file tree text to your clipboard.
+- **💾 Download**: Save the file tree as a `.txt` file locally.
+- **🗑️ Clear**: Clear the current display results.
 
-### 2. 扫描目录
-*   **接口**: `POST /api/scan`
-*   **描述**: 扫描指定目录并返回 JSON 格式的文件列表。
-*   **请求体 (JSON)**:
-    ```json
-    {
-        "path": "C:/Projects/Demo",
-        "max_depth": -1,
-        "show_size": true,
-        "exclude_patterns": ["node_modules", ".git"]
-    }
-    ```
+------
 
-### 3. 生成树文本
-*   **接口**: `POST /api/tree`
-*   **描述**: 直接返回格式化好的树状结构文本。
-*   **请求体**: 同 `/api/scan`。
-*   **响应 (JSON)**:
-    ```json
-    {
-        "success": true,
-        "tree_text": "📁 Demo/\n├── 📄 main.cpp (1.2 KB)\n└── ...",
-        "file_count": 15
-    }
-    ```
+## 🔌 API Documentation
 
----
+The backend provides a RESTful API for automation scripts or other tools.
 
-## 📂 项目结构
+### 1. Get Server Info
 
-```text
+- **Endpoint**: `GET /api/info`
+- **Description**: Check server status and version.
+
+### 2. Scan Directory
+
+- **Endpoint**: `POST /api/scan`
+
+- **Description**: Scans a specified directory and returns a file list in JSON format.
+
+- **Request Body (JSON)**:
+
+  ```json
+  {
+      "path": "C:/Projects/Demo",
+      "max_depth": -1,
+      "show_size": true,
+      "exclude_patterns": ["node_modules", ".git"]
+  }
+  ```
+
+### 3. Generate Tree Text
+
+- **Endpoint**: `POST /api/tree`
+
+- **Description**: Directly returns the formatted tree structure text.
+
+- **Request Body**: Same as `/api/scan`.
+
+- **Response (JSON)**:
+
+  ```json
+  {
+      "success": true,
+      "tree_text": "📁 Demo/\n├── 📄 main.cpp (1.2 KB)\n└── ...",
+      "file_count": 15
+  }
+  ```
+
+------
+
+## 📂 Project Structure
+
+```
 fuzzy-palm-tree/
-├── CMakeLists.txt       # CMake 构建脚本
+├── CMakeLists.txt        # CMake build script
 ├── include/
-│   └── httplib.h        # HTTP 服务器库头文件
+│   └── httplib.h         # Header for the HTTP server library
 ├── src/
-│   ├── backend/         # C++ 后端核心代码
-│   │   ├── main.cpp     # 程序入口与参数解析
-│   │   ├── webserver.*  # Web 服务器与 API 实现
-│   │   └── filesystem.* # 文件扫描与树生成逻辑
-│   └── frontend/        # Web 前端资源
-│       ├── index.html   # 主界面
-│       ├── script.js    # 前端交互逻辑
-│       └── style.css    # 界面样式
-└── build/               # 编译输出目录 (自动生成)
+│   ├── backend/          # C++ Backend core code
+│   │   ├── main.cpp      # Entry point and argument parsing
+│   │   ├── webserver.* # Web server and API implementation
+│   │   └── filesystem.* # File scanning and tree generation logic
+│   └── frontend/         # Web Frontend assets
+│       ├── index.html    # Main interface
+│       ├── script.js     # Frontend interaction logic
+│       └── style.css     # Interface styling
+└── build/                # Build output directory (auto-generated)
 ```
 
-## ⚠️ 注意事项
+## ⚠️ Notes
 
-1.  **安全提示**: 本工具设计用于本地受信任网络环境。它允许访问运行服务器的主机上的文件系统，**切勿**将其暴露在公共互联网上。
-2.  **路径格式**: 在 Windows 上支持使用正斜杠 `/` 或反斜杠 `\`。
-3.  **权限**: 确保运行程序的用户对目标扫描目录拥有读取权限。
-
-## 📄 许可证
-
-本项目采用 **MIT 许可证** 开源。
-
+1. **Security Warning**: This tool is designed for trusted local network environments. It allows access to the filesystem of the host running the server. **DO NOT** expose it to the public internet.
+2. **Path Formats**: Supports both forward slashes `/` and backslashes `\` on Windows.
+3. **Permissions**: Ensure the user running the program has read permissions for the target scanning directories.
